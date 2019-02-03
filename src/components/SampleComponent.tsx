@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+// import { AddPhotoIcon } from './BasicImageOperations'
 
 export default class SampleComponent extends Component<any, any> {
   constructor(props: any) {
@@ -33,6 +34,7 @@ export default class SampleComponent extends Component<any, any> {
     return (
       <section>
         <ul>{this.renderData()}</ul>
+        {/* <AddPhotoIcon /> */}
       </section>
     );
   }
