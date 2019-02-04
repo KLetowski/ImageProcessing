@@ -2,9 +2,14 @@ import React, { Component } from 'react';
 import { ImageWrapper, Img, Wrapper } from './styles/DraggableImageStyle';
 import { RotateLeftIcon } from './styles/icons';
 import InfoIcon from '@material-ui/icons/Info';
+import { ImageStoreType } from '../store/ImageStore';
+import { observer, inject } from 'mobx-react';
 
 type Props = {
   imgPath: string;
+  store?: {
+    imageStory: ImageStoreType;
+  };
 };
 
 type State = {
@@ -27,7 +32,7 @@ type Position = {
   left: number;
 };
 
-export default class DraggableImage extends Component<Props, State> {
+export class DraggableImage extends Component<Props, State> {
   private imageRef = React.createRef<HTMLDivElement>();
   private imgWrapperRef = React.createRef<HTMLDivElement>();
 
@@ -48,6 +53,7 @@ export default class DraggableImage extends Component<Props, State> {
     this.elementDrag = this.elementDrag.bind(this);
     this.closeDragElement = this.closeDragElement.bind(this);
     this.rotateLeftClick = this.rotateLeftClick.bind(this);
+    this.imageLoaded = this.imageLoaded.bind(this);
   }
 
   componentWillReceiveProps(nextProps: Props) {
@@ -156,14 +162,23 @@ export default class DraggableImage extends Component<Props, State> {
     imageRef.style.transform = `rotateZ(${imageRotation}deg)`;
   }
 
+  imageLoaded(event: any) {
+    const { offsetWidth, offsetHeight } = event.target;
+    const { store }: any = this.props;
+
+    store.imageStory.setWidthAndHeight(offsetWidth, offsetHeight);
+  }
+
   render() {
     return (
       <ImageWrapper ref={this.imgWrapperRef}>
         <Wrapper ref={this.imageRef}>
-          <Img src={this.props.imgPath} />
+          <Img src={this.props.imgPath} onLoad={this.imageLoaded} />
           <RotateLeftIcon onClick={this.rotateLeftClick} />
         </Wrapper>
       </ImageWrapper>
     );
   }
 }
+
+export default inject('store')(observer(DraggableImage));

@@ -1,33 +1,27 @@
 import React, { Component } from 'react';
+import { inject, observer } from 'mobx-react';
+import { ImageStoreType } from '../store/ImageStore';
 
 type Props = {
   imageUrl: string;
+  store?: {
+    imageStory: ImageStoreType;
+  };
 };
 
-type State = {
-  imageWidth: number;
-  imageHeight: number;
-};
+type State = {};
 
-export default class ImageInformations extends Component<Props, State> {
+export class ImageInformations extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
-
-    this.state = {
-      imageWidth: 0,
-      imageHeight: 0
-    };
   }
 
-  printPixelsAmount(): any {
-    let params = {
-      imageWidth: 0,
-      imageHeight: 0
-    };
+  printPixelsAmount() {
+    const { image } = (this.props.store as any).imageStory;
 
     return (
       <p>
-        {this.state.imageWidth}px x {this.state.imageHeight}px
+        {image.width}px x {image.height}px
       </p>
     );
   }
@@ -40,3 +34,5 @@ export default class ImageInformations extends Component<Props, State> {
     );
   }
 }
+
+export default inject('store')(observer(ImageInformations));
