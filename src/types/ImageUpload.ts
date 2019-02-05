@@ -36,10 +36,8 @@ export const ImageUpload = types
         canvas.height = img.offsetHeight;
         ctx.drawImage(img, 0, 0);
         img.style.display = 'none';
-
         var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-        debugger;
-        that.updateImagePRoperties({
+        that.updateImageProperties({
           source: self.source,
           title: '',
           height: canvas.height,
@@ -50,11 +48,19 @@ export const ImageUpload = types
     },
 
     addNewImage(image: ImageUploadModel) {
-      self = Object.assign(image);
+      self.source = image.source;
+      self.height = image.height;
+      self.title = image.title;
+      self.uploadDateTime = image.uploadDateTime;
+      self.width = image.width;
     },
 
-    updateImagePRoperties(image: ImageUploadModel) {
-      self = Object.assign(image);
+    updateImageProperties(image: ImageUploadModel) {
+      self.source = image.source;
+      self.height = image.height;
+      self.title = image.title;
+      self.uploadDateTime = image.uploadDateTime;
+      self.width = image.width;
     }
   }));
 

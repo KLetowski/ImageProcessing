@@ -11,11 +11,11 @@ import { store } from './store/Store';
 import AdvancedImageOperations from './components/AdvancedImageOperations';
 import { history } from './store/History';
 
-// makeInspectable(store);
+makeInspectable(store);
 
-// onPatch(store.imageUpload, patch => {
-//   console.log(patch);
-// });
+onPatch(store.imageUpload, patch => {
+  console.log(patch);
+});
 
 class App extends Component {
   render() {

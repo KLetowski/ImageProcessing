@@ -16,10 +16,9 @@ export class ImageInformations extends Component<Props, State> {
     return this.props as InjectedProps;
   }
 
-  render() {
+  renderView() {
     const { imageUpload } = this.injected.store;
     const isImageUpload: boolean = imageUpload.source.length > 0;
-
     return (
       <Wrapper>
         {isImageUpload ? (
@@ -41,6 +40,10 @@ export class ImageInformations extends Component<Props, State> {
         )}
       </Wrapper>
     );
+  }
+
+  render() {
+    return this.renderView();
   }
 }
 
