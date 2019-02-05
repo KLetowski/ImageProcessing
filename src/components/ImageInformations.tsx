@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
-import { ImageStoreType } from '../store/ImageStore';
+import { Wrapper } from './styles/ImageInformations';
+import { InjectedProps } from '../store/Store';
 
-type Props = {
-  imageUrl: string;
-  store?: {
-    imageStory: ImageStoreType;
-  };
-};
+type Props = {};
 
 type State = {};
 
@@ -16,21 +12,34 @@ export class ImageInformations extends Component<Props, State> {
     super(props);
   }
 
-  printPixelsAmount() {
-    const { image } = (this.props.store as any).imageStory;
-
-    return (
-      <p>
-        {image.width}px x {image.height}px
-      </p>
-    );
+  get injected() {
+    return this.props as InjectedProps;
   }
 
   render() {
+    const { imageUpload } = this.injected.store;
+    const isImageUpload: boolean = imageUpload.source.length > 0;
+
     return (
-      <div>
-        <div>{this.printPixelsAmount()}</div>
-      </div>
+      <Wrapper>
+        {isImageUpload ? (
+          <div>
+            <h4>Width: {imageUpload.width}px</h4>
+            <h4>Height: {imageUpload.height}px</h4>
+            <h4>
+              Upload: {imageUpload.uploadDateTime.getHours()}:
+              {imageUpload.uploadDateTime.getMinutes()}
+              <span>
+                {imageUpload.uploadDateTime.getDate()}/
+                {imageUpload.uploadDateTime.getMonth() + 1}/
+                {imageUpload.uploadDateTime.getFullYear()}
+              </span>
+            </h4>
+          </div>
+        ) : (
+          <h4>No image upload</h4>
+        )}
+      </Wrapper>
     );
   }
 }

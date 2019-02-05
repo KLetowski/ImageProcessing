@@ -1,36 +1,41 @@
 import React, { Component } from 'react';
-import SampleComponent from './components/SampleComponent';
 import { Routing } from './utils/routing';
 import { theme } from './utils/matrialUITheme';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import BasicImageOperations from './components/BasicImageOperations';
 import { Provider } from 'mobx-react';
 import { onPatch } from 'mobx-state-tree';
 import makeInspectable from 'mobx-devtools-mst';
 import { store } from './store/Store';
+import AdvancedImageOperations from './components/AdvancedImageOperations';
+import { history } from './store/History';
 
-makeInspectable(store);
+// makeInspectable(store);
 
-onPatch(store.imageStory, patch => {
-  console.log(patch);
-});
+// onPatch(store.imageUpload, patch => {
+//   console.log(patch);
+// });
 
 class App extends Component {
   render() {
     return (
       <MuiThemeProvider theme={theme}>
         <Provider store={store}>
-          <BrowserRouter>
+          <Router history={history}>
             <Switch>
               <Route
                 exact
                 path={Routing.start}
                 component={BasicImageOperations}
               />
-              <Route exact path="/asd" component={SampleComponent} />
+              <Route
+                exact
+                path={Routing.advancedOperations}
+                component={AdvancedImageOperations}
+              />
             </Switch>
-          </BrowserRouter>
+          </Router>
         </Provider>
       </MuiThemeProvider>
     );

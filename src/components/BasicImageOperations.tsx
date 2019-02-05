@@ -1,72 +1,57 @@
 import React, { Component } from 'react';
-import {
-  Content,
-  ButtonsWrapper,
-  FileUploadWrapper,
-  FileUploadInput
-} from './styles/BasicImageOperationsStyle';
-import { Button } from '@material-ui/core';
-import { AddPhotoIcon } from './styles/icons';
+import { Content, ButtonsWrapper } from './styles/BasicImageOperationsStyle';
+import { Button, Link } from '@material-ui/core';
 import DraggableImage from './DraggableImage';
 import ImageInformations from './ImageInformations';
 import { observer, inject } from 'mobx-react';
-import { ImageModel } from '../types/ImageUpload';
-import { ImageStoreType } from '../store/ImageStore';
+import GrayScale from './GrayScale';
+import RotateImage from './RotateImage';
+import UploadImage from './UploadImage';
+import { RouterStore } from 'mobx-react-router';
+import { ImageUploadType } from '../types/ImageUpload';
 
 type Props = {
   store: {
-    imageStory: ImageStoreType;
+    imageUpload: ImageUploadType;
+    routing: RouterStore;
   };
 };
 
-type State = {
-  imgPath: string;
-};
+type State = {};
 
 export class BasicImageOperations extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
-    this.state = {
-      imgPath: ''
-    };
-
-    this.uploadImage = this.uploadImage.bind(this);
+    this.resetColor = this.resetColor.bind(this);
   }
 
-  uploadImage(event: any) {
-    const { store } = this.props;
-    const imageSource = URL.createObjectURL(event.target.files[0]);
-
-    this.setState({
-      imgPath: imageSource
-    });
-
-    store.imageStory.add({
-      title: '',
-      source: imageSource,
-      width: 0,
-      height: 0
-    });
+  resetColor(event: any) {
+    const { imageUpload } = this.props.store;
   }
 
   render() {
     return (
       <Content>
         <ButtonsWrapper>
-          <FileUploadWrapper>
-            <Button variant="contained" color="primary">
-              <AddPhotoIcon />
-            </Button>
-            <FileUploadInput
-              type="file"
-              accept="image/png, image/jpeg"
-              onChange={this.uploadImage}
-            />
-          </FileUploadWrapper>
-          <ImageInformations imageUrl={this.state.imgPath} />
+          <UploadImage />
+          <RotateImage />
+          <GrayScale />
+          <Button color="primary" variant="contained" onClick={this.resetColor}>
+            reset color
+          </Button>
+          <Button
+            color="primary"
+            variant="contained"
+            onClick={() =>
+              this.props.store.routing.push('/advanced-operations')
+            }
+          >
+            more options
+          </Button>
+          <ImageInformations />
         </ButtonsWrapper>
-        <DraggableImage imgPath={this.state.imgPath} />
+        <DraggableImage />
       </Content>
     );
   }

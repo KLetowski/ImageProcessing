@@ -1,7 +1,9 @@
 import styled, { keyframes } from 'styled-components';
 
 export const Content = styled.section`
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 9fr;
+  column-gap: 0.125rem;
   height: 100vh;
   padding: 0;
 `;
@@ -24,4 +26,10 @@ export const FileUploadWrapper = styled.div`
   position: relative;
   overflow: hidden;
   display: inline-block;
+  display: flex;
+  flex-direction: column;
+
+  * {
+    cursor: pointer;
+  }
 `;

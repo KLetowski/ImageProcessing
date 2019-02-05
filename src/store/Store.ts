@@ -1,5 +1,14 @@
-import { ImageStore } from './ImageStore';
+import { ImageUpload } from '../types/ImageUpload';
+import { Instance } from 'mobx-state-tree';
+import { routingStore } from './History';
 
 export const store = {
-  imageStory: ImageStore.create({ image: {} })
+  imageUpload: ImageUpload.create({}),
+  routing: routingStore
 };
+
+export type StoreType = Instance<typeof store>;
+
+export interface InjectedProps {
+  store: StoreType;
+}

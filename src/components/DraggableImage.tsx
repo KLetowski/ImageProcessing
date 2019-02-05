@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
-import { ImageWrapper, Img, Wrapper } from './styles/DraggableImageStyle';
+import {
+  ImageWrapper,
+  Img,
+  Wrapper,
+  Canvas
+} from './styles/DraggableImageStyle';
 import { RotateLeftIcon } from './styles/icons';
-import InfoIcon from '@material-ui/icons/Info';
-import { ImageStoreType } from '../store/ImageStore';
+// import { ImageStoreType } from '../store/ImageStore';
 import { observer, inject } from 'mobx-react';
+import { ImageUploadType } from '../types/ImageUpload';
 
 type Props = {
-  imgPath: string;
   store?: {
-    imageStory: ImageStoreType;
+    imageStory: ImageUploadType;
   };
 };
 
@@ -19,7 +23,6 @@ type State = {
     right: number;
     bottom: number;
   };
-  imageRotation: number;
 };
 
 type Size = {
@@ -33,7 +36,7 @@ type Position = {
 };
 
 export class DraggableImage extends Component<Props, State> {
-  private imageRef = React.createRef<HTMLDivElement>();
+  private imageRef = React.createRef<HTMLCanvasElement>();
   private imgWrapperRef = React.createRef<HTMLDivElement>();
 
   constructor(props: Props) {
@@ -45,24 +48,19 @@ export class DraggableImage extends Component<Props, State> {
         top: 0,
         right: 0,
         bottom: 0
-      },
-      imageRotation: 0
+      }
     };
 
     this.dragMouseDown = this.dragMouseDown.bind(this);
     this.elementDrag = this.elementDrag.bind(this);
     this.closeDragElement = this.closeDragElement.bind(this);
-    this.rotateLeftClick = this.rotateLeftClick.bind(this);
-    this.imageLoaded = this.imageLoaded.bind(this);
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    if (nextProps.imgPath !== this.props.imgPath) {
-      this.dragImage(this.imageRef.current as HTMLDivElement);
-    }
-  }
+  componentDidMount = () => {
+    this.dragImage(this.imageRef.current as HTMLCanvasElement);
+  };
 
-  dragImage(element: HTMLDivElement) {
+  dragImage(element: HTMLCanvasElement) {
     element.onmousedown = this.dragMouseDown;
   }
 
@@ -87,7 +85,7 @@ export class DraggableImage extends Component<Props, State> {
   elementDrag(event: any) {
     event = event || window.event;
     event.preventDefault();
-    const imageRef = this.imageRef.current as HTMLElement;
+    const imageRef = this.imageRef.current as HTMLCanvasElement;
     const imgWrapperRef = this.imgWrapperRef.current as HTMLElement;
 
     this.setState({
@@ -149,32 +147,12 @@ export class DraggableImage extends Component<Props, State> {
     document.onmousemove = null;
   }
 
-  rotateLeftClick() {
-    const imageRef = this.imageRef.current as HTMLElement;
-    let { imageRotation } = this.state;
-    imageRotation -= 15;
-
-    this.setState({
-      imageRotation: imageRotation
-    });
-
-    imageRef.style.transition = `all 0.3s ease`;
-    imageRef.style.transform = `rotateZ(${imageRotation}deg)`;
-  }
-
-  imageLoaded(event: any) {
-    const { offsetWidth, offsetHeight } = event.target;
-    const { store }: any = this.props;
-
-    store.imageStory.setWidthAndHeight(offsetWidth, offsetHeight);
-  }
-
   render() {
     return (
       <ImageWrapper ref={this.imgWrapperRef}>
-        <Wrapper ref={this.imageRef}>
-          <Img src={this.props.imgPath} onLoad={this.imageLoaded} />
-          <RotateLeftIcon onClick={this.rotateLeftClick} />
+        <Wrapper>
+          <Img id="img" />
+          <Canvas id="canvas" ref={this.imageRef} />
         </Wrapper>
       </ImageWrapper>
     );

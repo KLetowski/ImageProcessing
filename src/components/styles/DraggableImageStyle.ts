@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
 export const ImageWrapper = styled.div`
   border: 0.25rem dashed #ccc;
@@ -9,10 +9,12 @@ export const ImageWrapper = styled.div`
 `;
 
 export const Img = styled.img``;
-
-export const Wrapper = styled.div`
+export const Canvas = styled.canvas`
   cursor: move;
   position: absolute;
+`;
+
+export const Wrapper = styled.div`
   display: flex;
 
   &:hover {

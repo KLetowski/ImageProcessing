@@ -1,3 +1,4 @@
 export enum Routing {
-  start = '/'
+  start = '/',
+  advancedOperations = '/advanced-operations'
 }
