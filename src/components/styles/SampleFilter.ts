@@ -10,10 +10,15 @@ export const Content = styled.div`
 
 export const ImageWrapper = styled.div`
   width: 40%;
+  align-self: center;
 `;
 
-export const Title = styled.h2`
+export const Title = styled.h1`
   flex: 0 1 100%;
+  text-aligin: center;
+  color: #fff;
+  font-family: Roboto;
+  color: #eee;
 `;
 
 export const FilterDescription = styled.div`
@@ -21,4 +26,14 @@ export const FilterDescription = styled.div`
   padding: 0 3rem;
   box-sizing: border-box;
   text-align: center;
+  color: #fff;
+`;
+
+export const Canvas = styled.canvas`
+  display: none;
+`;
+
+export const Description = styled.p`
+  font-size: 1.125rem;
+  line-height: 1.5;
 `;

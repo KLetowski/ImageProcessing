@@ -13,6 +13,7 @@ import BrightnessImage from './BrightnessImage';
 import InversionImage from './InversionImage';
 import ContrastImage from './ContrastImage';
 import ThresholdImage from './ThresholdImage';
+import { resetColor } from '../utils/filterHelpers';
 
 type Props = {
   store: {
@@ -26,14 +27,12 @@ type State = {};
 export class BasicImageOperations extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
-
-    this.resetColor = this.resetColor.bind(this);
   }
 
-  resetColor(event: any) {
-    const { imageUpload } = this.props.store;
-
-    imageUpload.resetColor();
+  resetColor() {
+    const image = document.getElementById('img') as HTMLImageElement;
+    const canvas = document.getElementById('canvas') as HTMLCanvasElement;
+    resetColor(image, canvas);
   }
 
   render() {

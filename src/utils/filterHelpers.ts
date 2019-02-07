@@ -1,10 +1,11 @@
 export const greyScaleFilter = (imageData: ImageData) => {
+  const data = imageData.data;
+
   for (let i = 0; i < imageData.data.length; i += 4) {
-    var avg =
-      (imageData.data[i] + imageData.data[i + 1] + imageData.data[i + 2]) / 3;
-    imageData.data[i] = avg;
-    imageData.data[i + 1] = avg;
-    imageData.data[i + 2] = avg;
+    let avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
+    data[i] = avg;
+    data[i + 1] = avg;
+    data[i + 2] = avg;
   }
 
   return imageData;
@@ -66,4 +67,14 @@ export const filter = (imageData: ImageData, matrix: number[]): ImageData => {
   }
 
   return output;
+};
+
+export const resetColor = (
+  img: HTMLImageElement,
+  canvas: HTMLCanvasElement
+) => {
+  const ctx: CanvasRenderingContext2D = canvas.getContext(
+    '2d'
+  ) as CanvasRenderingContext2D;
+  ctx.drawImage(img, 0, 0);
 };

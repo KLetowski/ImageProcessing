@@ -49,9 +49,8 @@ export default class RotateImage extends Component<Props, State> {
   rotateValueChanged(event: any) {
     let { value } = event.currentTarget;
     value = Number.parseInt(value);
-
     this.setState({
-      rotationDegree: Number.isInteger(value) ? value : 15
+      rotationDegree: Number.isNaN(value) ? 15 : value
     });
   }
 

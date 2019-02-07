@@ -5,7 +5,7 @@ import {
   Wrapper,
   Canvas
 } from './styles/DraggableImageStyle';
-import { observer, inject } from 'mobx-react';
+import { inject } from 'mobx-react';
 
 type Props = {};
 
@@ -152,4 +152,4 @@ export class DraggableImage extends Component<Props, State> {
   }
 }
 
-export default inject('store')(observer(DraggableImage));
+export default inject('store')(DraggableImage);

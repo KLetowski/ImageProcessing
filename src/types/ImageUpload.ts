@@ -35,7 +35,7 @@ export const ImageUpload = types
         canvas.height = img.offsetHeight;
         ctx.drawImage(img, 0, 0);
         img.style.display = 'none';
-        var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
         that.updateImageProperties({
           source: self.source,
           title: self.title,
@@ -44,19 +44,6 @@ export const ImageUpload = types
           uploadDateTime: new Date()
         });
       };
-    },
-
-    resetColor() {
-      const img: HTMLImageElement = document.getElementById(
-        'img'
-      ) as HTMLImageElement;
-      const canvas: HTMLCanvasElement = document.getElementById(
-        'canvas'
-      ) as HTMLCanvasElement;
-      const ctx: CanvasRenderingContext2D = canvas.getContext(
-        '2d'
-      ) as CanvasRenderingContext2D;
-      ctx.drawImage(img, 0, 0);
     },
 
     addNewImage(image: ImageUploadModel) {
