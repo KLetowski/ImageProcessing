@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 import { Content, ButtonsWrapper } from './styles/BasicImageOperationsStyle';
-import { Button, Link } from '@material-ui/core';
+import { Button } from '@material-ui/core';
+import { observer, inject } from 'mobx-react';
 import DraggableImage from './DraggableImage';
 import ImageInformations from './ImageInformations';
-import { observer, inject } from 'mobx-react';
 import GrayScale from './GrayScale';
 import RotateImage from './RotateImage';
 import UploadImage from './UploadImage';
 import { RouterStore } from 'mobx-react-router';
 import { ImageUploadType } from '../types/ImageUpload';
+import BrightnessImage from './BrightnessImage';
+import InversionImage from './InversionImage';
+import ContrastImage from './ContrastImage';
+import ThresholdImage from './ThresholdImage';
 
 type Props = {
   store: {
@@ -28,6 +32,8 @@ export class BasicImageOperations extends Component<Props, State> {
 
   resetColor(event: any) {
     const { imageUpload } = this.props.store;
+
+    imageUpload.resetColor();
   }
 
   render() {
@@ -37,6 +43,10 @@ export class BasicImageOperations extends Component<Props, State> {
           <UploadImage />
           <RotateImage />
           <GrayScale />
+          <BrightnessImage />
+          <InversionImage />
+          <ContrastImage />
+          <ThresholdImage />
           <Button color="primary" variant="contained" onClick={this.resetColor}>
             reset color
           </Button>

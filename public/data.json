@@ -1,20 +1,44 @@
 [
   {
-    "id": "11111",
-    "title": "title1",
-    "src": "./images/lena1.png",
-    "method": {
-      "name": "name1",
-      "description": "desc"
-    }
+    "id": 11111,
+    "title": "Sobel Filter",
+    "imageSource": "/images/Lenna1.png",
+    "description": "The Sobel operator, sometimes called the Sobel–Feldman operator or Sobel filter, is used in image processing and computer vision, particularly within edge detection algorithms where it creates an image emphasising edges. It is named after Irwin Sobel and Gary Feldman, colleagues at the Stanford Artificial Intelligence Laboratory (SAIL). Sobel and Feldman presented the idea of an \"Isotropic 3x3 Image Gradient Operator\" at a talk at SAIL in 1968.[1] Technically, it is a discrete differentiation operator, computing an approximation of the gradient of the image intensity function. At each point in the image, the result of the Sobel–Feldman operator is either the corresponding gradient vector or the norm of this vector. The Sobel–Feldman operator is based on convolving the image with a small, separable, and integer-valued filter in the horizontal and vertical directions and is therefore relatively inexpensive in terms of computations. On the other hand, the gradient approximation that it produces is relatively crude, in particular for high-frequency variations in the image.",
+    "mask": [],
+    "type": "SOBEL"
   },
   {
-    "id": "11112",
-    "title": "title1",
-    "src": "./images/lena1.png",
-    "method": {
-      "name": "name1",
-      "description": "desc"
-    }
+    "id": 11112,
+    "title": "Sharpen Filter",
+    "imageSource": "/images/Lenna1.png",
+    "description": "In image processing, a Gaussian blur (also known as Gaussian smoothing) is the result of blurring an image by a Gaussian function (named after mathematician and scientist Carl Friedrich Gauss). It is a widely used effect in graphics software, typically to reduce image noise and reduce detail. The visual effect of this blurring technique is a smooth blur resembling that of viewing the image through a translucent screen, distinctly different from the bokeh effect produced by an out-of-focus lens or the shadow of an object under usual illumination. Gaussian smoothing is also used as a pre-processing stage in computer vision algorithms in order to enhance image structures at different scales—see scale space representation and scale space implementation.",
+    "mask": [0, -1, 0, -1, 5, -1, 0, -1, 0],
+    "type": "WITH_MASK"
+  },
+  {
+    "id": 11113,
+    "title": "Blur Filter",
+    "imageSource": "/images/Lenna1.png",
+    "description": "In image processing, a Gaussian blur (also known as Gaussian smoothing) is the result of blurring an image by a Gaussian function (named after mathematician and scientist Carl Friedrich Gauss). It is a widely used effect in graphics software, typically to reduce image noise and reduce detail. The visual effect of this blurring technique is a smooth blur resembling that of viewing the image through a translucent screen, distinctly different from the bokeh effect produced by an out-of-focus lens or the shadow of an object under usual illumination. Gaussian smoothing is also used as a pre-processing stage in computer vision algorithms in order to enhance image structures at different scales—see scale space representation and scale space implementation.",
+    "mask": [
+      0.11111,
+      0.11111,
+      0.11111,
+      0.11111,
+      0.11111,
+      0.11111,
+      0.11111,
+      0.11111,
+      0.11111
+    ],
+    "type": "WITH_MASK"
+  },
+  {
+    "id": 11114,
+    "title": "Averaging",
+    "imageSource": "/images/Lenna1.png",
+    "description": "In image processing, a Gaussian blur (also known as Gaussian smoothing) is the result of blurring an image by a Gaussian function (named after mathematician and scientist Carl Friedrich Gauss). It is a widely used effect in graphics software, typically to reduce image noise and reduce detail. The visual effect of this blurring technique is a smooth blur resembling that of viewing the image through a translucent screen, distinctly different from the bokeh effect produced by an out-of-focus lens or the shadow of an object under usual illumination. Gaussian smoothing is also used as a pre-processing stage in computer vision algorithms in order to enhance image structures at different scales—see scale space representation and scale space implementation.",
+    "mask": [1, 1, 1, 1, 1, 1, 1, 1, 1],
+    "type": "WITH_MASK"
   }
 ]

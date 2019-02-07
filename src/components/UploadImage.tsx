@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import {
-  FileUploadWrapper,
-  FileUploadInput
-} from './styles/BasicImageOperationsStyle';
 import { Button } from '@material-ui/core';
 import { AddPhotoIcon } from './styles/icons';
 import { observer, inject } from 'mobx-react';
 import { InjectedProps } from '../store/Store';
+import { FileUploadWrapper, FileUploadInput } from './styles/UploadImageStyle';
 
 type Props = {};
 
@@ -14,7 +11,7 @@ type State = {};
 
 export class UploadImage extends Component<Props, State> {
   get injection() {
-    return this.props as InjectedProps;
+    return (this.props as InjectedProps).store;
   }
 
   constructor(props: Props) {
@@ -24,11 +21,12 @@ export class UploadImage extends Component<Props, State> {
   }
 
   uploadImage(event: any) {
-    const { imageUpload } = this.injection.store;
-    const imageSource: string = URL.createObjectURL(event.target.files[0]);
+    const { imageUpload } = this.injection;
+    const { files } = event.target;
+    const imageSource: string = URL.createObjectURL(files[0]);
 
     imageUpload.addNewImage({
-      title: '',
+      title: files[0].name,
       source: imageSource,
       width: 0,
       height: 0,

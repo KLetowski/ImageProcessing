@@ -8363,10 +8363,26 @@ react-event-listener@^0.6.2:
     prop-types "^15.6.0"
     warning "^4.0.1"
 
+react-intersection-observer@^6.1.0:
+  version "6.4.2"
+  resolved "https://registry.yarnpkg.com/react-intersection-observer/-/react-intersection-observer-6.4.2.tgz#a061add707c37ea14e1308c77c2e286719347928"
+  integrity sha512-gL6YrkhniA0tIbyDbUterzBwKh61vHR520rsKULel5T37gG4YP07wnWI3WoqOcKK5bKAu0PZB2FHD7/OjawN+w==
+  dependencies:
+    "@babel/runtime" "^7.2.0"
+    invariant "^2.2.4"
+
 react-is@^16.6.0, react-is@^16.6.3, react-is@^16.7.0:
   version "16.7.0"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.7.0.tgz#c1bd21c64f1f1364c6f70695ec02d69392f41bfa"
   integrity sha512-Z0VRQdF4NPDoI0tsXVMLkJLiwEBa+RP66g0xDHxgxysxSoCUccSten4RTF/UFvZF1dZvZ9Zu1sx+MDXwcOR34g==
+
+react-lazy-images@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-lazy-images/-/react-lazy-images-1.1.0.tgz#c865445c96e568a6249db03a2bb2dccd49cb6f50"
+  integrity sha512-h5DHFhkMJyh2qsDl3hXWu6d+On10FsgHtRJ+BH7xjgsFOvsqaii9CEwEESqPJrrAiHo1qrN1LgzrV8X3zctHKA==
+  dependencies:
+    react-intersection-observer "^6.1.0"
+    unionize "^2.1.2"
 
 react-lazy-load-image-component@^1.3.2:
   version "1.3.2"
@@ -9921,6 +9937,11 @@ union-value@^1.0.0:
     get-value "^2.0.6"
     is-extendable "^0.1.1"
     set-value "^0.4.3"
+
+unionize@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/unionize/-/unionize-2.1.2.tgz#2513b148de515bec93f045d1685bd88eab62b608"
+  integrity sha1-JROxSN5RW+yT8EXRaFvYjqtitgg=
 
 uniq@^1.0.1:
   version "1.0.1"

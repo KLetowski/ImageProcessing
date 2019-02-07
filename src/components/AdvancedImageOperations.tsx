@@ -1,14 +1,44 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { InjectedProps } from '../store/Store';
+import { inject, observer } from 'mobx-react';
+import SampleFilter from './MaskFilter';
+import { List, ListElement } from './styles/AdvancedImageOperations';
+import SobelFilter from './SobelFilter';
 
-export default class AdvancedImageOperations extends Component {
+enum FilterType {
+  SOBEL = 'SOBEL',
+  WITH_MASK = 'WITH_MASK'
+}
+
+type Props = {};
+
+type State = {};
+
+export class AdvancedImageOperations extends Component<Props, State> {
+  get injection() {
+    return (this.props as InjectedProps).store;
+  }
+
   componentWillMount = () => {
-    axios.get('/data.json').then((res: any) => {
-      console.log(res);
-    });
+    this.injection.filterMethods.loadData('/data.json');
   };
 
   render() {
-    return <div>dupa</div>;
+    return (
+      <List>
+        {this.injection.filterMethods.methods.map(method => (
+          <ListElement>
+            {method.type === FilterType.SOBEL ? (
+              <SobelFilter filter={method} />
+            ) : null}
+            {method.type === FilterType.WITH_MASK ? (
+              <SampleFilter filter={method} />
+            ) : null}
+          </ListElement>
+        ))}
+      </List>
+    );
   }
 }
+
+export default inject('store')(observer(AdvancedImageOperations));

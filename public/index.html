@@ -15,11 +15,11 @@
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
-    >
+    />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
-    >
+    />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
@@ -32,6 +32,12 @@
     -->
 
     <title>React App</title>
+    <style>
+      body {
+        scroll-snap-type: y mandatory;
+        overflow-y: scroll;
+      }
+    </style>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

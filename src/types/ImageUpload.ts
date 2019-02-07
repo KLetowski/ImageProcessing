@@ -1,4 +1,4 @@
-import { types, Instance } from 'mobx-state-tree';
+import { types, Instance, applySnapshot } from 'mobx-state-tree';
 
 export type ImageUploadModel = {
   title: string;
@@ -9,7 +9,7 @@ export type ImageUploadModel = {
 };
 
 export const ImageUpload = types
-  .model<ImageUploadModel>('ImageUpload', {
+  .model('ImageUpload', {
     title: '',
     source: '',
     width: 0,
@@ -24,7 +24,6 @@ export const ImageUpload = types
       ) as HTMLImageElement;
       img.src = self.source;
       img.style.display = 'block';
-
       img.onload = function() {
         const canvas: HTMLCanvasElement = document.getElementById(
           'canvas'
@@ -39,7 +38,7 @@ export const ImageUpload = types
         var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
         that.updateImageProperties({
           source: self.source,
-          title: '',
+          title: self.title,
           height: canvas.height,
           width: canvas.width,
           uploadDateTime: new Date()
@@ -47,20 +46,25 @@ export const ImageUpload = types
       };
     },
 
+    resetColor() {
+      const img: HTMLImageElement = document.getElementById(
+        'img'
+      ) as HTMLImageElement;
+      const canvas: HTMLCanvasElement = document.getElementById(
+        'canvas'
+      ) as HTMLCanvasElement;
+      const ctx: CanvasRenderingContext2D = canvas.getContext(
+        '2d'
+      ) as CanvasRenderingContext2D;
+      ctx.drawImage(img, 0, 0);
+    },
+
     addNewImage(image: ImageUploadModel) {
-      self.source = image.source;
-      self.height = image.height;
-      self.title = image.title;
-      self.uploadDateTime = image.uploadDateTime;
-      self.width = image.width;
+      applySnapshot(self, image);
     },
 
     updateImageProperties(image: ImageUploadModel) {
-      self.source = image.source;
-      self.height = image.height;
-      self.title = image.title;
-      self.uploadDateTime = image.uploadDateTime;
-      self.width = image.width;
+      applySnapshot(self, image);
     }
   }));
 

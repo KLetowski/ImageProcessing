@@ -13,16 +13,17 @@ export class ImageInformations extends Component<Props, State> {
   }
 
   get injected() {
-    return this.props as InjectedProps;
+    return (this.props as InjectedProps).store;
   }
 
   renderView() {
-    const { imageUpload } = this.injected.store;
+    const { imageUpload } = this.injected;
     const isImageUpload: boolean = imageUpload.source.length > 0;
     return (
       <Wrapper>
         {isImageUpload ? (
           <div>
+            <h4>{imageUpload.title}</h4>
             <h4>Width: {imageUpload.width}px</h4>
             <h4>Height: {imageUpload.height}px</h4>
             <h4>

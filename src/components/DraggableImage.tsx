@@ -5,16 +5,9 @@ import {
   Wrapper,
   Canvas
 } from './styles/DraggableImageStyle';
-import { RotateLeftIcon } from './styles/icons';
-// import { ImageStoreType } from '../store/ImageStore';
 import { observer, inject } from 'mobx-react';
-import { ImageUploadType } from '../types/ImageUpload';
 
-type Props = {
-  store?: {
-    imageStory: ImageUploadType;
-  };
-};
+type Props = {};
 
 type State = {
   imagePosition: {
