@@ -20,7 +20,7 @@ export const FilterMethods = types
   })
   .actions(self => ({
     loadData: flow(function* loadData(url: string) {
-      const response: AxiosResponse = yield axios.get('/data.json');
+      const response: AxiosResponse = yield axios.get(url);
       applySnapshot(self.methods, response.data);
     })
   }));
